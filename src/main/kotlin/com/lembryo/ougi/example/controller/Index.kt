@@ -1,7 +1,7 @@
-package ctrl
+package com.lembryo.ougi.example.controller
 
+import com.lembryo.ougi.http.Controller
 import com.lembryo.ougi.http.Response
-import com.lembryo.ougi.http.default.Controller
 
 class Index : Controller() {
 

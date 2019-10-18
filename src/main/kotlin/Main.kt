@@ -9,7 +9,7 @@ fun main(argv: Array<String>) {
 
     app.use(ParamsMiddleware()) // GET / POST のパラメータを解析
     app.use(ResponseMiddleware()) // レスポンスに Date や Content-Length などを付加
-    app.use(RoutingMiddleware("ctrl")) // ルーティングして Controller に処理を投げる
+    app.use(RoutingMiddleware("com.lembryo.ougi.example.controller")) // ルーティングして Controller に処理を投げる
 
     app.run() // サーバーを実行
 }

@@ -1,28 +1,29 @@
 buildscript {
     ext {
-        kotlin_version = "1.3.50"
+        kotlin_version = "1.3.20"
     }
     repositories {
         mavenCentral()
+        maven {
+            url "http://lembryo.github.io/maven/" // ougi を使用する
+        }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // TODO classpath "com.lembryo:ougi:0.0.5" // ougi plug-in を使用する
-        classpath files("../maven/com/lembryo/ougi/0.0.5/ougi-0.0.5.jar")
+        classpath "com.lembryo:ougi:0.0.5" // ougi plug-in を使用する
     }
 }
 
 apply plugin: "kotlin"
 apply plugin: "com.github.lembryo.ougi" // ougi plug-in を使用する
 
-group "com.lembryo.example"
+group "com.lembryo.ougi.example"
 version "0.0.5"
 
 repositories {
     mavenCentral()
     maven {
-        // TODO url "http://lembryo.github.io/maven/" // ougi を使用する
-        url "../maven"
+        url "http://lembryo.github.io/maven/" // ougi を使用する
     }
 }
 

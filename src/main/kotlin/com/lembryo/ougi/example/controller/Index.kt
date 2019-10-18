@@ -7,6 +7,6 @@ class Index : Controller() {
 
     // http://localhost/ アクセス時に呼ばれるメソッド
     fun index(): Response {
-        return view("index.html")
+        return Response(body = "Hello Ougi World!")
     }
 }

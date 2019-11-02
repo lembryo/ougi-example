@@ -5,12 +5,12 @@ buildscript {
     repositories {
         mavenCentral()
         maven {
-            url "http://lembryo.github.io/maven/" // ougi を使用する
+            url "https://lembryo.github.io/maven/" // ougi を使用する
         }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.lembryo:ougi:0.0.5" // ougi plug-in を使用する
+        classpath "com.lembryo:ougi:0.0.9" // ougi plug-in を使用する
     }
 }
 
@@ -18,21 +18,20 @@ apply plugin: "kotlin"
 apply plugin: "com.github.lembryo.ougi" // ougi plug-in を使用する
 
 group "com.lembryo.ougi.example"
-version "0.0.5"
+version "0.0.9"
 
 repositories {
     mavenCentral()
     maven {
-        url "http://lembryo.github.io/maven/" // ougi を使用する
+        url "https://lembryo.github.io/maven/" // ougi を使用する
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "com.lembryo:ougi:0.0.5" // ougi を使用する
+    implementation "com.lembryo:ougi:0.0.9" // ougi を使用する
 }
 
 ougi {
-    //
     group = project.group
 }

@@ -10,7 +10,7 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.lembryo:ougi:0.0.9" // ougi plug-in を使用する
+        classpath "com.lembryo:ougi:0.0.10" // ougi plug-in を使用する
     }
 }
 
@@ -29,7 +29,8 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "com.lembryo:ougi:0.0.9" // ougi を使用する
+    implementation "com.lembryo:ougi:0.0.10"
+    compile "org.jetbrains.kotlin:kotlin-script-runtime:1.3.20" // ougi を使用する
 }
 
 ougi {

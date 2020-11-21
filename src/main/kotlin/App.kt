@@ -1,30 +1,34 @@
+package com.lembryo.ougi
+
+import com.lembryo.ougi.controller.Home
 import com.lembryo.ougi.http.WebServer
 import com.lembryo.ougi.http.default.ParamsMiddleware
 import com.lembryo.ougi.http.default.ResponseMiddleware
 import com.lembryo.ougi.http.default.RoutingMiddleware
-import com.lembryo.ougi.http.html.Renderer
+import com.lembryo.ougi.http.default.SessionMiddleware
+import com.lembryo.ougi.http.html.view
 
 fun main(argv: Array<String>) {
 
-    val app = WebServer(8080) // 組み込みのウェブサーバーを生成する
+    // 組み込みのウェブサーバーを作成（デフォルトのポートは9801）
+    val app = WebServer()
 
-    app.use(ParamsMiddleware()) // GET / POST のパラメータを解析
-    app.use(ResponseMiddleware()) // レスポンスに Date や Content-Length などを付加
-    app.use(RoutingMiddleware {
-        get {
-            // HTMLレンダラに渡すデータを作成
-            val bindings = mutableMapOf<String, Any>()
-            bindings["title"] = "リスト"
-            bindings["data"] = mapOf(
-                "2019/11/02" to "昨日",
-                "2019/11/03" to "今日",
-                "2019/11/04" to "明日",
-                "2019/11/05" to "明後日"
-            )
-            // レンダリング
-            Renderer.html("index.kts", bindings)
-        }
-    })
+    // 必要なミドルウェアを組み込む
+    app.middleware(
+        arrayOf(
+            ParamsMiddleware(), // 受け取った GET / POST のパラメータ解析用のミドルウェア
+            ResponseMiddleware(), // レスポンスに日付やデータサイズを付加するミドルウェア
+            SessionMiddleware(), // セッション管理を行うミドルウェア（ファイルベース）
+            RoutingMiddleware() // アクセスされたURIに対して必要な関数呼び出しやクラスメソッド呼び出しを行うミドルウェア
+                    // コールバック関数を指定してルーティングを定義
+                    .get("/") {
+                        view("index")
+                    }
+                    // 任意のコントローラクラスと呼び出すメソッドを指定してルーティングを定義
+                    .get("/{id: Int}/{name: String}", Home::class.java, "index(id: Int, name: String)")
+        )
+    )
 
-    app.run() // サーバーを実行
+    // サーバーを実行
+    app.run()
 }
